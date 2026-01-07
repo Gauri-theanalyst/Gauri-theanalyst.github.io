@@ -5,75 +5,331 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gauri - Data Analyst Portfolio</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: #ffffff;
             line-height: 1.6;
-            color: #333;
+            min-height: 100vh;
         }
-        h1 { color: #2c3e50; }
-        h2 { color: #34495e; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        .project {
-            background: #f8f9fa;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
-        .skills {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
+        
+        h1 {
+            font-size: 3em;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tagline {
+            font-size: 1.3em;
+            color: #e0e7ff;
+            margin-bottom: 20px;
+        }
+        
+        .emoji-large {
+            font-size: 2em;
+        }
+        
+        section {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1e3a8a;
+            padding: 40px;
+            margin: 30px 0;
+            border-radius: 15px;
+            border: 2px solid #3b82f6;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+        }
+        
+        h2 {
+            color: #1e3a8a;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3b82f6;
+        }
+        
+        .about-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #1e40af;
+        }
+        
+        .about-text strong {
+            color: #1e3a8a;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
         .skill {
-            background: #3498db;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+            color: #ffffff;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1em;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+        }
+        
+        .skill:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.5);
+        }
+        
+        .project-card {
+            background: rgba(59, 130, 246, 0.05);
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 12px;
+            border-left: 5px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-left-width: 8px;
+        }
+        
+        .project-card h3 {
+            color: #1e3a8a;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .project-status {
+            display: inline-block;
+            background: #3b82f6;
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
-            font-size: 14px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        
+        .status-planned {
+            background: #60a5fa;
+        }
+        
+        .quote-section {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1e3a8a;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+            border-left: 5px solid #3b82f6;
+            font-style: italic;
+            font-size: 1.2em;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .contact-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+            background: linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%);
+        }
+        
+        .highlight {
+            color: #3b82f6;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #e0e7ff;
+            font-size: 0.9em;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+        
+        ul li {
+            margin: 10px 0;
+            color: #1e40af;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .tagline {
+                font-size: 1em;
+            }
+            section {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Gauri - Data Analyst Portfolio</h1>
-    
-    <section>
-        <h2>About Me</h2>
-        <p>Master of Business Analytics student at Deakin University with a passion for turning data into actionable insights. I specialize in bridging the gap between technical teams and business stakeholders.</p>
-    </section>
+    <div class="container">
+        <header>
+            <h1>Hey, I'm Gauri <span class="emoji-large">👋</span></h1>
+            <p class="tagline">Data Analyst in the Making | Master's Student | Coffee-to-Code Converter ☕→💻</p>
+        </header>
 
-    <section>
-        <h2>Skills</h2>
-        <div class="skills">
-            <span class="skill">Python</span>
-            <span class="skill">SQL</span>
-            <span class="skill">Pandas</span>
-            <span class="skill">Data Visualization</span>
-            <span class="skill">Statistical Analysis</span>
-            <span class="skill">Excel</span>
+        <section>
+            <h2>🎯 Here's the Deal</h2>
+            <p class="about-text">
+                By day, I'm grinding through my <strong>Master of Business Analytics at Deakin</strong>. 
+                By evening, I'm working part-time. By night? I'm teaching myself to turn messy data into "aha!" moments.
+            </p>
+            <p class="about-text" style="margin-top: 20px;">
+                <strong>The Goal:</strong> Become the person who walks into a room full of confused executives and developers, 
+                listens to both, and says <em>"Here's what the data actually says, and here's what we should do about it."</em>
+            </p>
+            <p class="about-text" style="margin-top: 20px;">
+                Because honestly? The world doesn't need more people who can just run code. 
+                It needs people who can <span class="highlight">make data make sense to everyone in the room</span>.
+            </p>
+        </section>
+
+        <section>
+            <h2>🔥 Why I'm Different</h2>
+            <p class="about-text">
+                Most people learn data analysis to get a job. I'm learning it to <strong>get out of labor work</strong> 
+                and <strong>help others do the same</strong>.
+            </p>
+            <p class="about-text" style="margin-top: 20px;">
+                Real talk:
+            </p>
+            <ul>
+                <li>💪 I'm funding my own master's degree</li>
+                <li>📚 I study full-time while working part-time</li>
+                <li>🚀 I'm building this portfolio from scratch because I believe in showing, not telling</li>
+                <li>🎯 My endgame? Not just landing a good job—creating opportunities for others</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>🛠️ What's in My Toolkit</h2>
+            <div class="skills-grid">
+                <div class="skill">🐍 Python</div>
+                <div class="skill">🗄️ SQL</div>
+                <div class="skill">🐼 Pandas</div>
+                <div class="skill">📊 NumPy</div>
+                <div class="skill">📈 Matplotlib</div>
+                <div class="skill">🎨 Seaborn</div>
+                <div class="skill">📑 Excel</div>
+                <div class="skill">💻 Jupyter</div>
+                <div class="skill">🔧 Git/GitHub</div>
+            </div>
+            <p class="about-text" style="margin-top: 30px;">
+                <strong>Currently Leveling Up:</strong> Tableau & Power BI (making data sexy), 
+                Statistical Analysis (beyond "this number is bigger"), Machine Learning basics
+            </p>
+        </section>
+
+        <div class="quote-section">
+            "I don't do analysis for analysis sake. Every project needs to answer: <strong>So what should we do differently?</strong>"
         </div>
-    </section>
 
-    <section>
-        <h2>Case Studies</h2>
-        
-        <div class="project">
-            <h3>🏠 Project 1: [Coming Soon]</h3>
-            <p><strong>Business Question:</strong> Your first project question here</p>
-            <p><strong>Status:</strong> In Progress</p>
+        <section>
+            <h2>💼 What I'm Building</h2>
+            
+            <div class="project-card">
+                <h3>🏠 Melbourne Student Housing Analysis</h3>
+                <p class="about-text">
+                    <strong>The Question Nobody's Answering:</strong> Where can broke international students 
+                    actually afford to live near uni?
+                </p>
+                <p class="about-text" style="margin-top: 10px;">
+                    Analyzing rental data to find the sweet spot between "affordable" and 
+                    "not spending 3 hours commuting."
+                </p>
+                <span class="project-status">🚧 In Progress</span>
+            </div>
+
+            <div class="project-card">
+                <h3>💸 Part-Time Job Market Reality Check</h3>
+                <p class="about-text">
+                    <strong>The Question:</strong> Which industries actually pay decent wages for part-time work?
+                </p>
+                <p class="about-text" style="margin-top: 10px;">
+                    Data-driven job search strategy for students like me.
+                </p>
+                <span class="project-status status-planned">📋 Coming Next</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>🤝 Let's Connect</h2>
+            <p class="about-text" style="text-align: center; margin-bottom: 30px;">
+                Want to collaborate, chat about data, or hire someone who brings hustle + skills?
+            </p>
+            <div class="contact-links">
+                <a href="mailto:your-email@deakin.edu.au" class="contact-btn">📧 Email Me</a>
+                <a href="https://github.com/Gauri-theanalyst" class="contact-btn" target="_blank">💻 GitHub</a>
+                <a href="https://linkedin.com/in/yourprofile" class="contact-btn" target="_blank">💼 LinkedIn</a>
+            </div>
+        </section>
+
+        <div class="quote-section">
+            "I'm not here to be another data analyst. I'm here to be the analyst who actually makes data make sense to humans."
         </div>
 
-        <div class="project">
-            <h3>📊 Project 2: [Planned]</h3>
-            <p><strong>Business Question:</strong> Your second project idea</p>
-        </div>
-    </section>
-
-    <section>
-        <h2>Contact</h2>
-        <p>📧 Email: [Your email]</p>
-        <p>💼 GitHub: <a href="https://github.com/Gauri-theanalyst">Gauri-theanalyst</a></p>
-    </section>
+        <footer>
+            <p>Built with determination, fueled by coffee ☕</p>
+            <p style="margin-top: 10px;">Last updated: January 2025</p>
+        </footer>
+    </div>
 </body>
 </html>
