@@ -26,11 +26,8 @@
         }
         
         header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-            padding: 60px 40px;
+            text-align: center;
+            padding: 60px 20px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             margin-bottom: 40px;
@@ -38,18 +35,14 @@
             backdrop-filter: blur(10px);
         }
         
-        .header-content {
-            text-align: left;
-        }
-        
         .profile-image {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             border: 5px solid white;
+            margin-bottom: 20px;
             object-fit: cover;
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            flex-shrink: 0;
         }
         
         h1 {
@@ -62,11 +55,11 @@
         .tagline {
             font-size: 1.3em;
             color: #e0e7ff;
-            margin-bottom: 0;
+            margin-bottom: 20px;
         }
         
         .emoji-large {
-            font-size: 1em;
+            font-size: 2em;
         }
         
         section {
@@ -224,16 +217,6 @@
         }
         
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-                padding: 40px 20px;
-            }
-            
-            .header-content {
-                text-align: center;
-            }
-            
             h1 {
                 font-size: 2em;
             }
@@ -244,8 +227,8 @@
                 padding: 20px;
             }
             .profile-image {
-                width: 120px;
-                height: 120px;
+                width: 150px;
+                height: 150px;
             }
         }
     </style>
@@ -254,10 +237,8 @@
     <div class="container">
         <header>
             <img src="profile.jpeg" alt="Gauri Bawa" class="profile-image">
-            <div class="header-content">
-                <h1>Hey, I'm Gauri <span class="emoji-large">👋</span></h1>
-                <p class="tagline">Data Analyst in the Making | Master's Student | Coffee-to-Code Converter ☕→💻</p>
-            </div>
+            <h1>Hey, I'm Gauri <span class="emoji-large">👋</span></h1>
+            <p class="tagline">Data Analyst in the Making | Master's Student | Coffee-to-Code Converter ☕→💻</p>
         </header>
 
         <section>
@@ -293,25 +274,26 @@
             </ul>
         </section>
 
-       <section>
-    <h2>🛠️ What's in My Toolkit</h2>
-    <div class="skills-grid">
-        <div class="skill">🐍 Python</div>
-        <div class="skill">🐼 Pandas</div>
-        <div class="skill">📊 NumPy</div>
-        <div class="skill">📈 Matplotlib</div>
-        <div class="skill">🎨 Seaborn</div>
-        <div class="skill">📑 Excel</div>
-        <div class="skill">📊 Power BI</div>
-        <div class="skill">📉 Tableau</div>
-        <div class="skill">🌐 WordPress</div>
-        <div class="skill">💻 Jupyter</div>
-        <div class="skill">🔧 Git/GitHub</div>
-    </div>
-    <p class="about-text" style="margin-top: 30px;">
-        <strong>Currently Leveling Up:</strong> SQL, Advanced Statistical Analysis, Machine Learning basics
-    </p>
-</section>
+        <section>
+            <h2>🛠️ What's in My Toolkit</h2>
+            <div class="skills-grid">
+                <div class="skill">🐍 Python</div>
+                <div class="skill">🐼 Pandas</div>
+                <div class="skill">📊 NumPy</div>
+                <div class="skill">📈 Matplotlib</div>
+                <div class="skill">🎨 Seaborn</div>
+                <div class="skill">📑 Excel</div>
+                <div class="skill">📊 Power BI</div>
+                <div class="skill">📉 Tableau</div>
+                <div class="skill">🌐 WordPress</div>
+                <div class="skill">💻 Jupyter</div>
+                <div class="skill">🔧 Git/GitHub</div>
+            </div>
+            <p class="about-text" style="margin-top: 30px;">
+                <strong>Currently Leveling Up:</strong> SQL, Advanced Statistical Analysis, Machine Learning basics
+            </p>
+        </section>
+
         <div class="quote-section">
             "I don't do analysis for analysis sake. Every project needs to answer: <strong>So what should we do differently?</strong>"
         </div>
