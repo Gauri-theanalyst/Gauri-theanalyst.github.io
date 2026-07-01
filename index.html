@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gauri-Business Analyts</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFDF9;
+    --ink: #1C1917;
+    --ink-soft: #44403C;
+    --ink-muted: #78716C;
+    --terracotta: #C2674A;
+    --terracotta-light: #F0D5CC;
+    --sage: #6B8F71;
+    --sage-light: #D4E6D6;
+    --gold: #B5873A;
+    --gold-light: #F0E4CC;
+    --border: #E7E0D8;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.6; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 4rem;
+    background: rgba(250,247,242,0.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--ink); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--ink-soft); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--terracotta); }
+  .btn-nav { background: var(--terracotta); color: white; padding: 0.5rem 1.25rem; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 0.82rem; transition: background 0.2s; }
+  .btn-nav:hover { background: #A8523A; }
+  .btn-primary { background: var(--terracotta); color: white; padding: 0.75rem 1.75rem; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: background 0.2s, transform 0.2s; display: inline-block; }
+  .btn-primary:hover { background: #A8523A; transform: translateY(-1px); }
+  .btn-secondary { background: transparent; color: var(--ink); padding: 0.75rem 1.75rem; border-radius: 999px; border: 1.5px solid var(--border); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: border-color 0.2s, transform 0.2s; }
+  .btn-secondary:hover { border-color: var(--ink-soft); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 4rem 4rem; max-width: 1100px; margin: 0 auto; }
+  .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; width: 100%; }
+  .hero-tag { display: inline-block; background: var(--terracotta-light); color: var(--terracotta); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.4rem 0.9rem; border-radius: 999px; margin-bottom: 1.5rem; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 4.5vw, 3.8rem); line-height: 1.1; color: var(--ink); margin-bottom: 1.5rem; }
+  .hero h1 em { font-style: italic; color: var(--terracotta); }
+  .hero-desc { font-size: 1rem; color: var(--ink-soft); line-height: 1.75; margin-bottom: 2rem; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  /* FINDINGS CARD */
+  .findings-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    overflow: hidden;
+  }
+
+  .finding-block {
+    padding: 1.5rem;
+    border-radius: 16px;
+    background: var(--cream);
+    margin-bottom: 0.75rem;
+    transition: transform 0.2s;
+  }
+
+  .finding-block:last-child { margin-bottom: 0; }
+  .finding-block:hover { transform: translateX(4px); }
+
+  .finding-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .finding-num.terra { color: var(--terracotta); }
+  .finding-num.sage  { color: var(--sage); }
+  .finding-num.gold  { color: var(--gold); }
+
+  .finding-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .finding-context {
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem 0.5rem;
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+  }
+
+  .card-footer-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--sage);
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* SECTIONS */
+  section { max-width: 1100px; margin: 0 auto; padding: 5rem 4rem; }
+  .section-eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.75rem; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--ink); margin-bottom: 1rem; line-height: 1.2; }
+  .section-desc { font-size: 1rem; color: var(--ink-soft); max-width: 560px; line-height: 1.75; margin-bottom: 3rem; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* PROJECTS */
+  .projects-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+  .project-card { background: var(--warm-white); border: 1px solid var(--border); border-radius: 18px; padding: 2rem 2.25rem; display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: start; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; }
+  .project-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.07); }
+  .project-status { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: 999px; margin-bottom: 0.75rem; }
+  .status-done { background: var(--sage-light); color: var(--sage); }
+  .status-progress { background: var(--gold-light); color: var(--gold); }
+  .project-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.25; }
+  .project-question { font-size: 0.88rem; color: var(--terracotta); font-style: italic; margin-bottom: 0.75rem; font-weight: 500; }
+  .project-desc { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.65; margin-bottom: 1rem; }
+  .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .tag { background: var(--cream); border: 1px solid var(--border); color: var(--ink-soft); font-size: 0.75rem; font-family: 'DM Mono', monospace; padding: 0.25rem 0.65rem; border-radius: 6px; }
+  .project-arrow { font-size: 1.5rem; color: var(--ink-muted); transition: transform 0.2s, color 0.2s; padding-top: 0.25rem; }
+  .project-card:hover .project-arrow { transform: translate(3px, -3px); color: var(--terracotta); }
+
+  /* SKILLS */
+  .skills-bg { background: var(--ink); padding: 5rem 0; }
+  .skills-inner { max-width: 1100px; margin: 0 auto; padding: 0 4rem; }
+  .skills-bg .section-eyebrow { color: var(--terracotta); }
+  .skills-bg .section-title { color: var(--warm-white); margin-bottom: 0.75rem; }
+  .skills-bg .section-desc { color: #A8A29E; margin-bottom: 2.5rem; }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .skill-group { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.5rem; }
+  .skill-group-title { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 1rem; }
+  .skill-list { display: flex; flex-direction: column; gap: 0.6rem; }
+  .skill-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.88rem; color: #D6D3D1; }
+  .skill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--terracotta); flex-shrink: 0; }
+
+  /* CONTACT */
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link { display: flex; align-items: center; gap: 1rem; text-decoration: none; background: var(--warm-white); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.5rem; transition: transform 0.2s, box-shadow 0.2s; }
+  .contact-link:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+  .contact-link-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--terracotta-light); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .contact-link-text strong { display: block; font-size: 0.9rem; color: var(--ink); font-weight: 600; }
+  .contact-link-text span { font-size: 0.82rem; color: var(--ink-muted); }
+
+  footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--ink-muted); }
+
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    section { padding: 3.5rem 1.5rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .skills-inner { padding: 0 1.5rem; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Gauri</a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="Gauri_Bawa_Resume_v4.docx" class="btn-nav">Resume</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="fade-in">
+      <span class="hero-tag">Business Analytics · Open to Work</span>
+      <h1>Turning messy data into <em>decisions that matter</em></h1>
+      <p class="hero-desc">
+        Hey, I'm Gauri - an international student from India, finishing my Master of Business Analytics at Deakin University. I build end-to-end analytics projects on real datasets. Not tutorials. Real data, real findings, real surprises.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">See my work</a>
+        <a href="#contact" class="btn-secondary">Let's talk</a>
+      </div>
+    </div>
+
+    <!-- FINDINGS CARD -->
+    <div class="findings-card fade-in" style="transition-delay:0.15s">
+
+      <div class="finding-block">
+        <div class="finding-num terra">49%</div>
+        <div class="finding-label">of £9.7M revenue from just 600 customers</div>
+        <div class="finding-context">Pareto principle-confirmed in 780,000+ real transactions, not a textbook.</div>
+      </div>
+
+      <div class="finding-block">
+        <div class="finding-num sage">0.09</div>
+        <div class="finding-label">review score correlation with Airbnb price</div>
+        <div class="finding-context">Guests pay for space, not stars. Capacity correlation? 0.53. Data challenged the obvious assumption.</div>
+      </div>
+
+      <div class="finding-block">
+        <div class="finding-num gold">65-80%</div>
+        <div class="finding-label">of new customers never return after purchase 1</div>
+        <div class="finding-context">That's not a data problem. That's a marketing problem worth millions.</div>
+      </div>
+
+      <div class="card-footer">
+        <span class="card-footer-dot"></span>
+        From real projects · updated 2026
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-eyebrow">Projects</p>
+  <h2 class="section-title">Questions I actually wanted to answer</h2>
+  <p class="section-desc">These aren't assignments. Each one started with a real business question and ended with a finding that surprised me.</p>
+  <div class="projects-grid">
+
+    <a href="https://github.com/Gauri-theanalyst/customer-behaviour-sql-analysis" target="_blank" class="project-card fade-in">
+      <div>
+        <span class="project-status status-done">Complete</span>
+        <h3>Customer Behaviour SQL Analysis</h3>
+        <p class="project-question">"Where is this business actually making money and who are the customers driving it?"</p>
+        <p class="project-desc">Analysed 780,000+ real UK e-commerce transactions across 4 marketing frameworks: RFM segmentation, cohort retention, market basket analysis, and revenue trends. Found that 600 customers (10% of the base) drive 49% of £9.7M revenue. Identified a 65-80% first-purchase churn rate and a consistent September revenue spike of 38-48% MoM.</p>
+        <div class="project-tags">
+          <span class="tag">MySQL</span><span class="tag">CTEs</span><span class="tag">Window Functions</span><span class="tag">RFM</span><span class="tag">Cohort Analysis</span>
+        </div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a href="https://github.com/Gauri-theanalyst/airbnb-albany-eda" target="_blank" class="project-card fade-in" style="transition-delay:0.1s">
+      <div>
+        <span class="project-status status-done">Complete</span>
+        <h3>Airbnb Albany Pricing EDA</h3>
+        <p class="project-question">"What actually drives Airbnb pricing and is it what everyone assumes?"</p>
+        <p class="project-desc">Exploratory data analysis on 426 real Airbnb listings. Challenged the assumption that review scores drive pricing correlation was just 0.09. The real driver? Capacity (0.53). Engineered a price_per_person metric that completely reversed the perceived value rankings of luxury listings.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Seaborn</span><span class="tag">EDA</span><span class="tag">Correlation Analysis</span>
+        </div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <div class="project-card fade-in" style="transition-delay:0.2s; cursor:default;">
+      <div>
+        <span class="project-status status-progress">In Progress</span>
+        <h3>NYC Restaurant Survival Analysis</h3>
+        <p class="project-question">"What separates the restaurants that survive from the ones that don't in the world's most brutal food market?"</p>
+        <p class="project-desc">Analysing 200,000+ NYC health inspection records to uncover what actually predicts restaurant survival - violations, neighbourhood, cuisine type, or something else entirely. The most competitive food market in the world, told through data.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">NYC Open Data</span><span class="tag">Geospatial</span>
+        </div>
+      </div>
+      <span class="project-arrow" style="color:var(--border)">↗</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div class="skills-bg" id="skills">
+  <div class="skills-inner">
+    <p class="section-eyebrow">Skills</p>
+    <h2 class="section-title">What I actually know how to use</h2>
+    <p class="section-desc">Not a keyword list - tools I've used on real datasets with real findings.</p>
+    <div class="skills-grid">
+      <div class="skill-group fade-in">
+        <p class="skill-group-title">SQL & Data</p>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot"></span>MySQL & BigQuery</div>
+          <div class="skill-item"><span class="skill-dot"></span>CTEs & Window Functions</div>
+          <div class="skill-item"><span class="skill-dot"></span>Self Joins & Subqueries</div>
+          <div class="skill-item"><span class="skill-dot"></span>RFM Segmentation</div>
+          <div class="skill-item"><span class="skill-dot"></span>Cohort Analysis</div>
+          <div class="skill-item"><span class="skill-dot"></span>KPI Definition & Tracking</div>
+        </div>
+      </div>
+      <div class="skill-group fade-in" style="transition-delay:0.1s">
+        <p class="skill-group-title">Python</p>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot"></span>Pandas & NumPy</div>
+          <div class="skill-item"><span class="skill-dot"></span>Matplotlib & Seaborn</div>
+          <div class="skill-item"><span class="skill-dot"></span>Exploratory Data Analysis</div>
+          <div class="skill-item"><span class="skill-dot"></span>Data Cleaning & ETL</div>
+          <div class="skill-item"><span class="skill-dot"></span>BeautifulSoup4 & Selenium</div>
+        </div>
+      </div>
+      <div class="skill-group fade-in" style="transition-delay:0.2s">
+        <p class="skill-group-title">Visualisation & BI</p>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot"></span>Power BI</div>
+          <div class="skill-item"><span class="skill-dot"></span>Tableau</div>
+          <div class="skill-item"><span class="skill-dot"></span>Advanced Excel</div>
+          <div class="skill-item"><span class="skill-dot"></span>Google Sheets</div>
+          <div class="skill-item"><span class="skill-dot"></span>Dashboard Design</div>
+          <div class="skill-item"><span class="skill-dot"></span>Statistical Analysis</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-eyebrow">Contact</p>
+  <h2 class="section-title">Let's talk</h2>
+  <div class="contact-inner">
+    <div class="fade-in">
+      <p class="section-desc" style="margin-bottom:1.5rem;">I'm actively looking for Business Analytics roles - remote or based in Australia. If you're working on something interesting with data, I'd genuinely love to hear about it.</p>
+      <a href="Gauri_Resume.docx" class="btn-primary">Download my resume</a>
+    </div>
+    <div class="contact-links fade-in" style="transition-delay:0.1s">
+      <a href="mailto:gauribawa7@gmail.com" class="contact-link">
+        <div class="contact-link-icon">✉️</div>
+        <div class="contact-link-text"><strong>Email</strong><span>gauribawa7@gmail.com</span></div>
+      </a>
+      <a href="https://www.linkedin.com/in/gauri-bawa-774962347/" target="_blank" class="contact-link">
+        <div class="contact-link-icon">💼</div>
+        <div class="contact-link-text"><strong>LinkedIn</strong><span>linkedin.com/in/gauri-bawa-774962347</span></div>
+      </a>
+      <a href="https://github.com/Gauri-theanalyst" target="_blank" class="contact-link">
+        <div class="contact-link-icon">🐙</div>
+        <div class="contact-link-text"><strong>GitHub</strong><span>github.com/Gauri-theanalyst</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>Built by Gauri Bawa · 2026 · Melbourne, Australia · 🇮🇳 → 🇦🇺</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
